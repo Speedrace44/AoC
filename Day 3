@@ -1,0 +1,17 @@
+def countTrees(n, line, first, count, pos):
+    if(line[n % len(line)] == "#"):
+        count += 1
+    if(len(lines) - 1 == pos):
+        return count
+    else:
+        pos += 2
+        return countTrees(n+1, lines[pos], False, count, pos)
+def remember(n, line, first, count, pos, right, down):
+    if(line[n % len(line)] == "#"):
+        count += 1
+    pos += down
+    if(len(lines) - 1 <= pos):
+        return count
+    return countTrees(n+right, lines[pos], False, count, pos, right, down)
+
+print(countTrees(0, lines[0], True, 0, 0))
