@@ -1,0 +1,16 @@
+
+# Online Python - IDE, Editor, Compiler, Interpreter
+
+with open('input.txt') as f:
+    lines = f.readlines()
+
+lines = [str.rstrip(a) for a in lines]
+
+def increase():
+    num = 0
+    for i, a in enumerate(lines):
+        if(i != 0):
+            if(int(a) > int(lines[i-1])):
+                num += 1
+    return num
+print(increase())
