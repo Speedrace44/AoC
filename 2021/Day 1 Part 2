@@ -1,0 +1,22 @@
+
+# Online Python - IDE, Editor, Compiler, Interpreter
+
+with open('input.txt') as f:
+    lines = f.readlines()
+
+lines = [str.rstrip(a) for a in lines]
+lines = [int(a) for a in lines]
+def increase():
+    num = 0
+    new = []
+    for i, a in enumerate(lines):
+        if(i+2 < len(lines)):
+            new.append(lines[i]+lines[i+1]+lines[i+2])
+        else:
+            break
+    for i, a in enumerate(new):
+        if(i != 0):
+            if(a > new[i-1]):
+                num += 1
+    return num
+print(increase())
