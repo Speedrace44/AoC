@@ -1,0 +1,43 @@
+
+# Online Python - IDE, Editor, Compiler, Interpreter
+
+with open('input.txt') as f:
+    lines = f.readlines()
+
+lines = [str.rstrip(a) for a in lines]
+first = [64, 32, 16, 8, 4, 2, 1]
+second = [4, 2, 1]
+def seating():
+    offset = 0
+    div = first[0]
+    div2 = first[0]
+    aList = []
+    for txt in lines:
+        seats = [i for i in range(127)]
+        i = 0
+        for a in txt[:7]:
+            div = first[i]
+            if(a == "F"):
+                seats = seats[:div]
+            else:
+                seats = seats[div:]
+            i+=1
+        row = seats[0]
+        seats = range(128)
+        i = 0
+        for a in txt[7:]:
+            div = second[i]
+            if(a == "L"):
+                seats = seats[:div]
+            else:
+                seats = seats[div:]
+            i += 1
+        column = seats[0]
+        aList.append((row * 8) + column)
+    aList = sorted(aList)
+    print(aList)
+    for i, a in enumerate(aList):
+        if(i != 0):
+            if(a - aList[i-1] != 1):
+                print(a-1)
+print(seating())
