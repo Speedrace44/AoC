@@ -1,0 +1,65 @@
+
+# Online Python - IDE, Editor, Compiler, Interpreter
+import copy
+with open('input.txt') as f:
+    lines = f.readlines()
+
+lines = [str.rstrip(a) for a in lines]
+
+def game():
+    ins = [[a.split(" ")[0], a.split(" ")[1][0], int(a.split(" ")[1][1:])] for a in lines]
+    aCopy = copy.deepcopy(ins)
+    j = 0
+    prev = None
+    total = []
+    while(True):
+        if(j == len(ins)):
+            return total
+        if(ins[j][0] == "jmp"):
+            ins[j][0] = "nop"
+            #if(prev != None):
+                #if(ins[prev][0] == "nop"):
+                    #ins[prev][0] = "jmp"
+                #else:
+                    #ins[prev][0] = "nop"
+                #print(prev)
+            #prev = j
+        elif(ins[j][0] == "nop"):
+            ins[j][0] = "jmp"
+            #if(prev != None):
+                #if(ins[prev][0] == "nop"):
+                    #ins[prev][0] = "jmp"
+                #else:
+                    #ins[prev][0] = "nop"
+            #prev = j
+        else:
+            j+=1
+            continue
+        i = 0
+        indices = []
+        acc = 0
+        while i not in indices:
+            indices.append(i)
+            offset = 1
+            if(i not in range(len(ins))):
+                return [acc]
+            if(ins[i][0] == "acc"):
+                acc += ins[i][2] if ins[i][1] == "+" else ins[i][2] * -1
+            elif(ins[i][0] == "jmp"):
+                offset = ins[i][2] if ins[i][1] == "+" else ins[i][2] * -1
+            #indices.append(ins[i][0])
+            i += offset
+            if(len(indices) == len(ins)):
+                return acc
+        ins = copy.deepcopy(aCopy)
+        #if(ins[j][0] == "nop"):
+            #print(ins[j][0])
+            #ins[j][0] = "jmp"
+            #print(ins[j][0])
+        #else:
+            #print(ins[j][0])
+            #ins[j][0] = "nop"
+            #print(ins[j][0])
+        j+=1
+    return acc
+print(game())
