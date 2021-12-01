@@ -1,0 +1,32 @@
+
+# Online Python - IDE, Editor, Compiler, Interpreter
+
+with open('input.txt') as f:
+    lines = f.readlines()
+
+lines = [str.rstrip(a) for a in lines]
+
+def seating():
+    collection = []
+    bin = {}
+    valid = 0
+    lineCount = 0
+    for l in lines:
+        if(l == ""):
+            lineCount += sum(list(bin.values()))
+            print(list(bin.values()))
+            bin = {}
+        else:
+            b = {}
+            track = {c : 1 for c in "abcdefghijklmnopqrstuvwxyz"}
+            for c in l:
+                if(c not in b):
+                    b[c] = 1
+                    track[c] = 0
+            for c in track:
+                if(track[c] == 1):
+                    b[c] = 0
+            bin.update(b)
+    lineCount += sum(list(bin.values()))
+    return lineCount 
+print(seating())
