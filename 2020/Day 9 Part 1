@@ -1,0 +1,23 @@
+
+# Online Python - IDE, Editor, Compiler, Interpreter
+import copy
+with open('input.txt') as f:
+    lines = f.readlines()
+
+lines = [str.rstrip(a) for a in lines]
+
+def xmas():
+    new = [int(a) for a in lines]
+    aDict = {new[i] : 1 for i in range(25)}
+    for i in range (25, len(new)):
+        valid = False
+        for a in aDict:
+            if(new[i] - a in aDict):
+                valid = True
+                break
+        if(not valid):
+            return [new[i], i]
+        else:
+            aDict.pop(new[i-25])
+            aDict[new[i]] = 1
+print(xmas())
