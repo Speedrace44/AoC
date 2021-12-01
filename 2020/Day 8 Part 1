@@ -1,0 +1,23 @@
+
+# Online Python - IDE, Editor, Compiler, Interpreter
+
+with open('input.txt') as f:
+    lines = f.readlines()
+
+lines = [str.rstrip(a) for a in lines]
+
+def game():
+    ins = [[a.split(" ")[0], a.split(" ")[1][0], int(a.split(" ")[1][1:])] for a in lines]
+    i = 0
+    indices = []
+    acc = 0
+    while i not in indices:
+        indices.append(i)
+        offset = 1
+        if(ins[i][0] == "acc"):
+            acc += ins[i][2] if ins[i][1] == "+" else ins[i][2] * -1
+        elif(ins[i][0] == "jmp"):
+            offset = ins[i][2] if ins[i][1] == "+" else ins[i][2] * -1
+        i += offset
+    return acc
+print(game())
