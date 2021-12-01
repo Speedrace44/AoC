@@ -1,0 +1,35 @@
+
+# Online Python - IDE, Editor, Compiler, Interpreter
+
+with open('input.txt') as f:
+    lines = f.readlines()
+
+lines = [str.rstrip(a) for a in lines]
+
+def bags():
+    collection = []
+    bin = {}
+    valid = 0
+    lineCount = 0
+    for l in lines:
+        baglist = l.split("contain ")[1].split(", ")
+        result = []
+        if(baglist[0][0].isdigit()):
+            baglist = [a.split(" ") for a in baglist]
+            result = [a[1] + a[2] for a in baglist]
+        bin[l.split(" ")[0] + l.split(" ")[1]] = result
+    prev = 1
+    total = []
+    first = True
+    while(True):
+        if(first):
+            first = False
+            total.append("shinygold")
+        for a in bin:
+            if(any(b in bin[a] for b in total) and a not in total):
+                total.append(a)
+        if(len(total) == prev):
+            return len(total)
+        else:
+            prev = len(total)
+print(bags())
