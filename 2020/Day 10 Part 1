@@ -1,0 +1,26 @@
+
+# Online Python - IDE, Editor, Compiler, Interpreter
+
+def jolts():
+    with open('input.txt') as f:
+        lines = f.readlines()
+    lines = [int(str.rstrip(a)) for a in lines]
+    lines = sorted(lines)
+    ones = 0
+    threes = 0
+    print(lines)
+    if(lines[0] == 1):
+        ones += 1
+    elif(lines[0] == 3):
+        threes += 1
+    arrangement = 1
+    for i in range(len(lines)):
+        j = i + 1
+        possible = -1
+        while(j != len(lines)):
+            if(lines[j] - lines[i] <= 3):
+                possible += 1
+            j+=1
+        arrangement += max(0, possible-1)
+    return ones * threes
+print(jolts())
