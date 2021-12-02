@@ -1,0 +1,17 @@
+
+# Online Python - IDE, Editor, Compiler, Interpreter
+
+def course():
+    with open('input.txt') as f:
+        lines = [str.rstrip(a) for a in f.readlines()]
+    depth = 0
+    pos = 0
+    for a in lines:
+        if(a.split(" ")[0] == "forward"):
+            pos += int(a.split(" ")[1])
+        elif(a.split(" ")[0] == "down"):
+            depth += int(a.split(" ")[1])
+        else:
+            depth -= int(a.split(" ")[1])
+    return depth * pos
+print(course())
